@@ -1,5 +1,11 @@
 # telephone-tapes-2
 
+Downloads the [Group 1 Playlist](https://evan-doorbell.com/group-1-playlist/) from
+[Evan Doorbell's Phone Tapes](https://evan-doorbell.com/) and converts them to `.m4b`
+audio book files.
+
+Successor to [`telephone-tapes`](https://github.com/Feuermurmel/telephone-tapes).
+
 ## Development
 
 ### Setup
@@ -12,14 +18,6 @@ for development:
 pre-commit install
 make venv
 . venv/bin/activate
-```
-
-### Tests
-
-Unit test can be run using [pytest](https://docs.pytest.org/en/stable/):
-
-```bash
-pytest
 ```
 
 ### Type Checking

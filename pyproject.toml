@@ -3,22 +3,19 @@ name = "telephone_tapes_2"
 version = "0.1.0"
 
 requires-python = ">= 3.12"
-dependencies = []
+dependencies = ["requests", "beautifulsoup4"]
 
 [project.optional-dependencies]
-dev = ["pytest", "mypy"]
+dev = ["mypy", "types-requests", "types-beautifulsoup4"]
 
 [project.scripts]
 telephone-tapes-2 = "telephone_tapes_2:entry_point"
 
 [tool.mypy]
-mypy_path = "$MYPY_CONFIG_FILE_DIR/src:$MYPY_CONFIG_FILE_DIR/tests"
-files = ["src", "tests"]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
+files = ["src"]
 strict = true
 enable_error_code = "unreachable, redundant-expr, possibly-undefined, truthy-bool, truthy-iterable, unused-awaitable, explicit-override, mutable-override"
-
-[tool.pytest.ini_options]
-testpaths = "tests"
 
 [tool.black]
 skip-magic-trailing-comma = true
