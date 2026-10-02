@@ -47,6 +47,19 @@ def convert_file(source_file: Any, dest_path: Any, track_nr: int) -> None:
     temp_output_path = dest_path.with_stem(f"{dest_path.stem}~")
     temp_output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # In the published files, not all chapters have exactly the
+    # same metadata. This leads to Books.app on iOS ignoring some
+    # files. The easiest solution is to just overwrite or remove
+    # all metadata that looks like it could trigger this.
+    metadata = dict(
+        artist="Evan Doorbell",
+        album="Telephone Tapes — Group 1 Playlist",
+        track=f"{track_nr}",
+        date="",
+        comment="",
+        genre="",
+    )
+
     try:
         subprocess.run(
             [
@@ -59,7 +72,7 @@ def convert_file(source_file: Any, dest_path: Any, track_nr: int) -> None:
                 *("-q:a", "2"),
                 # Drop cover art.
                 "-vn",
-                *("-metadata", f"track={track_nr}"),
+                *(j for k, v in metadata.items() for j in ["-metadata", f"{k}={v}"]),
                 f"{temp_output_path}",
             ],
             # Prevent ffmpeg from changing TTY settings.
